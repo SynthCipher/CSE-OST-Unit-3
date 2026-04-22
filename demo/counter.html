@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Counter Demo | Unit 3</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .counter-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 { font-size: 4rem; margin: 1rem 0; }
+        .btns { display: flex; gap: 1rem; }
+        button {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: none;
+            background: #6366f1;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover { transform: scale(1.05); background: #4f46e5; }
+        .reset { background: #64748b; }
+    </style>
+</head>
+<body>
+    <div class="counter-card">
+        <h3>Dynamic Counter</h3>
+        <h1 id="count">0</h1>
+        <div class="btns">
+            <button onclick="change(-1)">- Decrease</button>
+            <button onclick="change(1)">+ Increase</button>
+            <button class="reset" onclick="reset()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        const countDisplay = document.getElementById('count');
+
+        function change(val) {
+            count += val;
+            countDisplay.innerText = count;
+            countDisplay.style.transform = 'scale(1.2)';
+            setTimeout(() => countDisplay.style.transform = 'scale(1)', 100);
+        }
+
+        function reset() {
+            count = 0;
+            countDisplay.innerText = count;
+        }
+    </script>
+</body>
+</html>

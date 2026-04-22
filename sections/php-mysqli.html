@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3 PHP & MySQLi | Unit 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-section { max-width: 900px; margin: 4rem auto; padding: 0 5%; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; margin-bottom: 2rem; font-weight: 500; }
+        .topic-hero { background: var(--surface-color); border: 1px solid var(--surface-border); padding: 3rem; border-radius: 24px; margin-bottom: 3rem; }
+        .prose h2 { margin: 2.5rem 0 1rem; color: var(--accent); }
+        .prose p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.1rem; }
+        .code-block { background: #1e1e1e; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--surface-border); overflow-x: auto; margin: 1.5rem 0; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #d4d4d4; }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .variable { color: #9cdcfe; }
+        .comment { color: #6a9955; }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="scrollBar"></div>
+    </div>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="content-section">
+        <a href="../index.php" class="back-link"><i data-lucide="arrow-left"></i> Back to Curriculum</a>
+        
+        <div class="topic-hero">
+            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 0.5rem;">Polytechnic College Leh</div>
+            <h1>3.3 PHP & MySQLi</h1>
+            <p>Mastering server-side scripting and relational database management.</p>
+        </div>
+
+        <article class="prose">
+            <h2>Introduction to PHP</h2>
+            <p>PHP (Hypertext Preprocessor) is a server-side scripting language. It runs on the server and is used to process forms, connect to databases, and generate dynamic content.</p>
+            
+            <div class="card" style="margin: 2rem 0; cursor: default;">
+                <h3>Why PHP?</h3>
+                <ul>
+                    <li>Open source and free</li>
+                    <li>Works well with MySQL</li>
+                    <li>Used by giants like WordPress and Wikipedia</li>
+                    <li>PHP code is not visible to the user (Server-side)</li>
+                </ul>
+            </div>
+
+            <h2>Embedding PHP in HTML</h2>
+            <div class="code-block">
+<span class="tag">&lt;!DOCTYPE</span> <span class="attr">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>
+        <span class="keyword">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"Welcome to PHP"</span>; <span class="keyword">?&gt;</span>
+    <span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+            </div>
+
+            <h2>PHP Variables</h2>
+            <div class="code-block">
+<span class="keyword">&lt;?php</span>
+<span class="variable">$name</span> = <span class="string">"Rahul"</span>;
+<span class="variable">$age</span> = <span class="val">20</span>;
+
+<span class="keyword">echo</span> <span class="string">"Name: "</span> . <span class="variable">$name</span>;
+<span class="keyword">echo</span> <span class="string">"&lt;br&gt;Age: "</span> . <span class="variable">$age</span>;
+<span class="keyword">?&gt;</span>
+            </div>
+
+            <h2>Form Handling</h2>
+            <p>PHP can collect data from HTML forms using <code>$_POST</code> or <code>$_GET</code>.</p>
+            <div class="code-block">
+<span class="comment">// HTML Form</span>
+<span class="tag">&lt;form</span> <span class="attr">method</span>=<span class="val">"post"</span> <span class="attr">action</span>=<span class="val">"welcome.php"</span><span class="tag">&gt;</span>
+    Name: <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">name</span>=<span class="val">"username"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/form&gt;</span>
+
+<span class="comment">// welcome.php</span>
+<span class="keyword">&lt;?php</span>
+<span class="variable">$name</span> = <span class="variable">$_POST</span>[<span class="string">'username'</span>];
+<span class="keyword">echo</span> <span class="string">"Welcome "</span> . <span class="variable">$name</span>;
+<span class="keyword">?&gt;</span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--surface-border); margin: 3rem 0;">
+
+            <h2>MySQLi (MySQL Improved)</h2>
+            <p>MySQL is an open-source relational database. MySQLi is the extension used to connect PHP with MySQL.</p>
+
+            <h3>Connecting to Database</h3>
+            <div class="code-block">
+<span class="keyword">&lt;?php</span>
+<span class="variable">$servername</span> = <span class="string">"localhost"</span>;
+<span class="variable">$username</span> = <span class="string">"root"</span>;
+<span class="variable">$password</span> = <span class="string">""</span>;
+<span class="variable">$database</span> = <span class="string">"college"</span>;
+
+<span class="variable">$conn</span> = <span class="keyword">new</span> <span class="tag">mysqli</span>(<span class="variable">$servername</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, <span class="variable">$database</span>);
+
+<span class="keyword">if</span> (<span class="variable">$conn</span>-><span class="variable">connect_error</span>) {
+    <span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . <span class="variable">$conn</span>-><span class="variable">connect_error</span>);
+}
+<span class="keyword">echo</span> <span class="string">"Connected successfully"</span>;
+<span class="keyword">?&gt;</span>
+            </div>
+
+            <h3>CRUD Operations</h3>
+            <ul>
+                <li><strong>INSERT:</strong> <code>INSERT INTO students (name, course) VALUES ('Aman', 'BCA')</code></li>
+                <li><strong>SELECT:</strong> <code>SELECT * FROM students</code></li>
+                <li><strong>UPDATE:</strong> <code>UPDATE students SET course='MCA' WHERE id=1</code></li>
+                <li><strong>DELETE:</strong> <code>DELETE FROM students WHERE id=1</code></li>
+            </ul>
+
+            <div class="card" style="margin-top: 3rem; cursor: default; border-color: var(--accent);">
+                <h3>Steps to use MySQLi</h3>
+                <ol>
+                    <li>Create a database</li>
+                    <li>Create a table</li>
+                    <li>Connect PHP with MySQL</li>
+                    <li>Execute SQL queries</li>
+                    <li>Display results</li>
+                </ol>
+            </div>
+        </article>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4 Deploying Web Applications | Unit 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-section { max-width: 900px; margin: 4rem auto; padding: 0 5%; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; margin-bottom: 2rem; font-weight: 500; }
+        .topic-hero { background: var(--surface-color); border: 1px solid var(--surface-border); padding: 3rem; border-radius: 24px; margin-bottom: 3rem; }
+        .prose h2 { margin: 2.5rem 0 1rem; color: var(--accent); }
+        .prose p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.1rem; }
+        .step { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; background: var(--surface-color); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--surface-border); }
+        .step-num { min-width: 40px; height: 40px; background: var(--gradient-1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="scrollBar"></div>
+    </div>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="content-section">
+        <a href="../index.php" class="back-link"><i data-lucide="arrow-left"></i> Back to Curriculum</a>
+        
+        <div class="topic-hero">
+            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 0.5rem;">Polytechnic College Leh</div>
+            <h1>3.4 Deploying Applications</h1>
+            <p>Making your web applications available on the internet or local server.</p>
+        </div>
+
+        <article class="prose">
+            <h2>Requirements for Deployment</h2>
+            <p>To deploy a PHP and MySQL application, you generally need:</p>
+            <ul>
+                <li><strong>Domain Name:</strong> e.g., www.mywebsite.com</li>
+                <li><strong>Web Hosting:</strong> Server supporting Apache, PHP, and MySQL.</li>
+                <li><strong>Access:</strong> FTP or a Control Panel (cPanel).</li>
+            </ul>
+
+            <hr style="border: 0; border-top: 1px solid var(--surface-border); margin: 3rem 0;">
+
+            <h2>Local Server for Testing</h2>
+            <p>Before going online, test locally using stacks like XAMPP, WAMP, or LAMP. They provide the necessary environment (Apache, PHP, MySQL).</p>
+            
+            <div class="card" style="margin: 2rem 0; cursor: default;">
+                <h3>Deploying Using XAMPP</h3>
+                <ol>
+                    <li>Install XAMPP and start Apache/MySQL.</li>
+                    <li>Place files inside the <code>htdocs</code> folder.</li>
+                    <li>Access via <code>http://localhost/projectname</code>.</li>
+                </ol>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--surface-border); margin: 3rem 0;">
+
+            <h2>Steps to Deploy Online</h2>
+            <div class="grid" style="grid-template-columns: 1fr; gap: 1rem; padding: 0;">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Create & Test</h3>
+                        <p>Develop your files and test thoroughly on your local server.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Upload Files</h3>
+                        <p>Upload your PHP files to the hosting server via FTP or File Manager.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Database Migration</h3>
+                        <p>Import your MySQL database (.sql file) using tools like phpMyAdmin on the server.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div>
+                        <h3>Final Connection</h3>
+                        <p>Update your PHP connection strings with the production database credentials.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 3rem; cursor: default; border-color: #ef4444;">
+                <h3>Common Problems during Deployment</h3>
+                <ul>
+                    <li>Database connection errors</li>
+                    <li>Missing files or wrong paths</li>
+                    <li>Incorrect database credentials</li>
+                    <li>PHP version mismatch</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

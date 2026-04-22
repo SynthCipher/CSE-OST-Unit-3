@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL & Database Lab | Unit 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .content-section { max-width: 1000px; margin: 4rem auto; padding: 0 5%; }
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; margin-bottom: 2rem; font-weight: 500; }
+        .topic-hero { background: var(--surface-color); border: 1px solid var(--surface-border); padding: 3rem; border-radius: 24px; margin-bottom: 3rem; text-align: center; }
+        .code-header { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+        .code-block { background: #0f172a; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--surface-border); overflow-x: auto; margin: 1rem 0; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #e2e8f0; position: relative; }
+        .copy-btn { position: absolute; top: 1rem; right: 1rem; background: var(--surface-color); border: 1px solid var(--surface-border); color: white; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+        .lab-card { background: var(--surface-color); padding: 2rem; border-radius: 20px; border: 1px solid var(--surface-border); margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="scrollBar"></div></div>
+    <div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+
+    <div class="content-section">
+        <a href="../index.php" class="back-link"><i data-lucide="arrow-left"></i> Back to Curriculum</a>
+        
+        <div class="topic-hero">
+            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 0.5rem;">Polytechnic College Leh</div>
+            <h1>SQL & Database Lab</h1>
+            <p>Hands-on scripts to create databases, tables, and perform CRUD operations.</p>
+        </div>
+
+        <div class="lab-card">
+            <div class="code-header">
+                <h3>1. SQL Setup Script (.sql)</h3>
+                <span style="color: var(--text-secondary); font-size: 0.8rem;">Use in phpMyAdmin SQL tab</span>
+            </div>
+            <div class="code-block" id="sqlCode">
+-- Create and Use Database
+CREATE DATABASE IF NOT EXISTS college;
+USE college;
+
+-- Create Table
+CREATE TABLE IF NOT EXISTS students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    course VARCHAR(50) NOT NULL
+);
+
+-- Insert Initial Data
+INSERT INTO students (name, course) VALUES 
+('Rahul Sharma', 'BCA'),
+('Ali Khan', 'MCA');
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="code-header">
+                <h3>2. PHP Database Connection & Display</h3>
+                <span style="color: var(--text-secondary); font-size: 0.8rem;">Save as db_demo.php</span>
+            </div>
+            <div class="code-block">
+&lt;?php
+$conn = new mysqli("localhost", "root", "", "college");
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM students";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"]. " - Name: " . $row["name"]. "&lt;br&gt;";
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+?&gt;
+            </div>
+        </div>
+
+        <div class="card" style="border-color: var(--accent); margin-top: 3rem;">
+            <h3>How to run these?</h3>
+            <ol style="margin-top: 1rem; color: var(--text-secondary); line-height: 1.8;">
+                <li>Start <strong>Apache</strong> and <strong>MySQL</strong> in XAMPP.</li>
+                <li>Open <strong>phpMyAdmin</strong> and paste the SQL script into the SQL tab.</li>
+                <li>Save the PHP code as a file in your <code>htdocs</code> folder.</li>
+                <li>Run it by visiting <code>localhost/yourfilename.php</code>.</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
